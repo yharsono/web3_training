@@ -65,6 +65,7 @@ export default function Home() {
       );
       // call the addAddressToWhitelist from the contract
       const tx = await whitelistContract.addAddressToWhitelist();
+      console.log(whitelistContract)
       setLoading(true);
       // wait for the transaction to get mined
       await tx.wait();
@@ -117,6 +118,7 @@ export default function Home() {
       );
       // Get the address associated to the signer which is connected to  MetaMask
       const address = await signer.getAddress();
+      console.log(address);
       // call the whitelistedAddresses from the contract
       const _joinedWhitelist = await whitelistContract.whitelistedAddresses(
         address
@@ -189,6 +191,10 @@ export default function Home() {
       connectWallet();
     }
   }, [walletConnected]);
+
+  useEffect(() => {
+    getNumberOfWhitelisted();
+  }, []);
 
   return (
     <div>
